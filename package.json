@@ -13,6 +13,8 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "@formkit/themes": "^1.5.9",
+    "@formkit/vue": "^1.5.9",
     "@midudev/tailwind-animations": "^0.0.7",
     "axios": "^1.6.7",
     "pinia": "^2.1.7",
