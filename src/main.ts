@@ -3,6 +3,12 @@ import './assets/main.css'
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 
+//formkit
+import {plugin, defaultConfig} from '@formkit/vue'
+import config from '../formkit.config'
+
+
+
 import {useToast} from 'vue-toast-notification'
 
 import App from './App.vue'
@@ -21,6 +27,7 @@ const app = createApp(App)
 app.provide('toast', $toast)
 
 app.use(createPinia())
+app.use(plugin, defaultConfig(config))
 app.use(router)
 
 app.mount('#app')
