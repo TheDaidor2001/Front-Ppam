@@ -14,9 +14,11 @@ import Addprogram from '@/components/icons/Add-Program.vue';
         <ListUsers :class="' size-20 text-center mx-auto'" />
       </CardHome>
     </RouterLink>
-    <CardHome text="Crear Voluntarios" info="Aquí podrás crear nuevos voluntarios del PPAM" classes="border-2">
-      <CirclePlus :class="' size-20 text-center mx-auto'" />
-    </CardHome>
+    <RouterLink :to="{ name: 'crear-voluntarios' }">
+      <CardHome text="Crear Voluntarios" info="Aquí podrás crear nuevos voluntarios del PPAM" classes="border-2">
+        <CirclePlus :class="' size-20 text-center mx-auto'" />
+      </CardHome>
+    </RouterLink>
     <CardHome text="Crear Programa" info="Crear nuevos programas para el PPAM">
       <Addprogram :class="' size-20 text-center mx-auto'" />
     </CardHome>

@@ -23,7 +23,8 @@ const router = useRouter()
         <div class="flex justify-between">
             <button class="bg-cyan-500 px-3 py-2 rounded-xl text-white font-semibold hover:bg-cyan-600 transition-colors"
                 @click="router.back()">Volver</button>
-            <button class="bg-cyan-500 px-3 py-2 rounded-xl text-white font-semibold hover:bg-cyan-600 transition-colors">
+            <button class="bg-cyan-500 px-3 py-2 rounded-xl text-white font-semibold hover:bg-cyan-600 transition-colors"
+                @click="router.push({ name: 'crear-voluntarios' })">
                 Crear voluntario
             </button>
         </div>
