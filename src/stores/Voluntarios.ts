@@ -73,6 +73,20 @@ export const useVoluntariosStore = defineStore('voluntarios', () => {
         ]
     })
 
+
+    async function createVoluntario (voluntario: Voluntario): Promise<void> {
+        try {
+            const res = await http.post('voluntarios', voluntario ,{
+                headers: {
+                    "Content-Type" : "application/json"
+                }
+            })
+            console.log(res);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     return {
         voluntarios,
         loading,
@@ -82,6 +96,7 @@ export const useVoluntariosStore = defineStore('voluntarios', () => {
         limit,
         getVoluntarios,
         filterVoluntarios,
+        createVoluntario,
 
         //computed
         getPages

@@ -1,8 +1,11 @@
 <script setup lang="ts">
+
 import { reactive } from 'vue'
 import { useRouter } from 'vue-router';
+import { useVoluntariosStore } from '../stores/Voluntarios';
 
 const router = useRouter()
+const voluntariosStore = useVoluntariosStore()
 
 const voluntario = reactive({
     nombre: '',
@@ -152,8 +155,18 @@ const disponibilidad = [
 
 
 
-const handleSubmit = () => {
+const handleSubmit = async () => {
+
     console.log(voluntario);
+
+
+    try {
+        voluntariosStore.createVoluntario(voluntario)
+    } catch (error) {
+        console.log(error);
+
+    }
+
 
 }
 </script>
@@ -166,7 +179,7 @@ const handleSubmit = () => {
         </header>
         <section class="max-w-5xl mx-auto mt-16 ">
 
-            <form class="w-full mx-auto py-10" @submit.prevent="handleSubmit">
+            <form class="w-full mx-auto pb-10" @submit.prevent="handleSubmit">
                 <div class="mb-5">
                     <label for="name" class="block mb-2 text-sm font-medium text-gray-900 ">Nombre</label>
                     <input type="text" id="name" v-model="voluntario.nombre"
