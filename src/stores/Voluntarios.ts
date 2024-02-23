@@ -2,7 +2,7 @@
 import type { Voluntario } from "@/interfaces/voluntario.interface";
 import http from "@/plugins/http";
 import { defineStore } from "pinia";
-import { computed, ref, watch } from "vue";
+import { computed, ref, watch, inject } from "vue";
 
 
 export const useVoluntariosStore = defineStore('voluntarios', () => {
@@ -14,6 +14,8 @@ export const useVoluntariosStore = defineStore('voluntarios', () => {
     const limit = ref<number>(10)
     const totalVoluntarios = ref<number>(0)
     const totalPages = ref<number>(0)
+
+    const toast = inject('toast') as any
 
 
     async function getVoluntarios():Promise<void> {
@@ -76,14 +78,29 @@ export const useVoluntariosStore = defineStore('voluntarios', () => {
 
     async function createVoluntario (voluntario: Voluntario): Promise<void> {
         try {
-            const res = await http.post('voluntarios', voluntario ,{
+            await http.post('voluntarios', voluntario ,{
                 headers: {
                     "Content-Type" : "application/json"
                 }
             })
-            console.log(res);
+            
+
+            getVoluntarios()
+        } catch (error) {
+            toast.open({
+                message: 'Error al crear al voluntario',
+                type: 'error'
+            })
+        }
+    }
+
+    async function updateVoluntario(id:any, voluntario: Voluntario) {
+        try {
+            const {data} = await http.patch(`voluntarios/${id}`, voluntario)
+            console.log(data);
         } catch (error) {
             console.log(error);
+            
         }
     }
 
@@ -97,6 +114,7 @@ export const useVoluntariosStore = defineStore('voluntarios', () => {
         getVoluntarios,
         filterVoluntarios,
         createVoluntario,
+        updateVoluntario,
 
         //computed
         getPages

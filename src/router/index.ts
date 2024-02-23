@@ -18,7 +18,13 @@ const router = createRouter({
       path: '/crear-voluntarios',
       name: 'crear-voluntarios',
       component: () => import('../views/CrearVoluntariosView.vue')
+    },
+    {
+      path: '/editar-voluntarios/:id',
+      name: 'editar-voluntarios',
+      component: () => import('../views/EditarVoluntarioView.vue')
     }
+    
   ]
 })
 

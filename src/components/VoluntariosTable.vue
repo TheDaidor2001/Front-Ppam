@@ -12,11 +12,7 @@ defineProps<{
     voluntarios: Voluntario[]
 }>()
 
-const open = ref<Boolean>(false)
 
-const toggleModal = () => {
-    open.value = !open.value
-}
 
 
 </script>
@@ -50,10 +46,10 @@ const toggleModal = () => {
                 <DeleteIcon :class="'size-10 p-2 bg-red-100 rounded-full text-red-500 hover:scale-105 transition-transform'"
                     @click="modal.openModal(item)" :id="item.id" :voluntario="item" />
             </button>
-            <button>
+            <RouterLink :to="{ name: 'editar-voluntarios', params: { id: item.id } }">
                 <EditIcon
                     :class="'size-10 p-2 bg-blue-100 rounded-full text-blue-500 hover:scale-105 transition-transform'" />
-            </button>
+            </RouterLink>
         </td>
     </tr>
 </template>

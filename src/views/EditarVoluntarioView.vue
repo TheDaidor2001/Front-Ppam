@@ -1,10 +1,14 @@
 <script setup lang="ts">
 import { inject } from 'vue'
-import { useRouter } from 'vue-router';
+import { useRouter, useRoute } from 'vue-router';
 import { useVoluntariosStore } from '../stores/Voluntarios';
 import { useVoluntarios } from '../composables/useVoluntario';
+import { onMounted } from 'vue';
+import http from '@/plugins/http';
 
 const router = useRouter()
+const route = useRoute()
+
 const voluntariosStore = useVoluntariosStore()
 
 const toast = inject('toast') as any
@@ -149,6 +153,31 @@ const disponibilidad = [
     }
 ]
 
+onMounted(() => {
+    getUser()
+})
+
+const getUser = async () => {
+    const { id } = route.params
+
+    try {
+        const { data } = await http.get(`/voluntarios/${id}`)
+
+        voluntario.nombre = data.nombre
+        voluntario.apellidos = data.apellidos
+        voluntario.congregacion = data.congregacion
+        voluntario.disponibilidad = data.disponibilidad
+        voluntario.isPrecursor = data.isPrecursor
+        voluntario.contacto = data.contacto
+
+        console.log(voluntario);
+
+
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 
 
 const handleSubmit = async () => {
@@ -163,10 +192,10 @@ const handleSubmit = async () => {
 
     }
 
-    voluntariosStore.createVoluntario(voluntario)
+    voluntariosStore.updateVoluntario(route.params.id, voluntario)
 
     toast.open({
-        message: 'Voluntarios creado con éxito',
+        message: 'Voluntarios actualizado con éxito',
         type: "success",
     })
 
@@ -188,7 +217,7 @@ const handleSubmit = async () => {
             <button class="bg-cyan-500 px-3 py-2 rounded-xl text-white font-semibold hover:bg-cyan-600 transition-colors"
                 @click="router.back()">Atrás</button>
 
-            <h1 class="mt-10 text-center text-4xl font-bold text-cyan-800">Crear nuevo Voluntario</h1>
+            <h1 class="mt-10 text-center text-4xl font-bold text-cyan-800">Editar Voluntario</h1>
         </header>
         <section class="max-w-5xl mx-auto mt-10 ">
 
@@ -234,9 +263,10 @@ const handleSubmit = async () => {
                     <select id="countries"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                         v-model="voluntario.congregacion">
-                        <option selected disabled>Selecciona la congregación</option>
-                        <option v-for="congregacion in congregaciones" :key="congregacion" :value="congregacion">{{
-                            congregacion }}</option>
+                        <option disabled>Selecciona la congregación</option>
+                        <option :selected="voluntario.congregacion" v-for="congregacion in congregaciones"
+                            :key="congregacion" :value="congregacion">{{
+                                congregacion }}</option>
                     </select>
                 </div>
 

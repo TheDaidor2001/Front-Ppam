@@ -5,6 +5,7 @@
     "src/**/*",
     "src/**/*.vue",
     "src/**/*.ts",
+    "src/composables/*.ts",
     "./*.ts"
   ],
   "exclude": [
