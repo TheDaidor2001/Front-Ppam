@@ -53,6 +53,3 @@ defineProps<{
         </td>
     </tr>
 </template>
-
-
-../stores/Modal
