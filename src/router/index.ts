@@ -23,6 +23,11 @@ const router = createRouter({
       path: '/editar-voluntarios/:id',
       name: 'editar-voluntarios',
       component: () => import('../views/EditarVoluntarioView.vue')
+    },
+    {
+      path: '/programa',
+      name: 'programa',
+      component: () => import('../views/ProgramaView.vue')
     }
     
   ]

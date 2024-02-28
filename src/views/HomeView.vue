@@ -19,8 +19,10 @@ import Addprogram from '@/components/icons/Add-Program.vue';
         <CirclePlus :class="' size-20 text-center mx-auto'" />
       </CardHome>
     </RouterLink>
-    <CardHome text="Crear Programa" info="Crear nuevos programas para el PPAM">
-      <Addprogram :class="' size-20 text-center mx-auto'" />
-    </CardHome>
+    <RouterLink :to="{ name: 'programa' }">
+      <CardHome text="Crear Programa" info="Crear nuevos programas para el PPAM">
+        <Addprogram :class="' size-20 text-center mx-auto'" />
+      </CardHome>
+    </RouterLink>
   </main>
 </template>

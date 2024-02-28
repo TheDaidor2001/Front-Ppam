@@ -96,8 +96,8 @@ export const useVoluntariosStore = defineStore('voluntarios', () => {
 
     async function updateVoluntario(id:any, voluntario: Voluntario) {
         try {
-            const {data} = await http.patch(`voluntarios/${id}`, voluntario)
-            console.log(data);
+            await http.patch(`voluntarios/${id}`, voluntario)
+            getVoluntarios()
         } catch (error) {
             console.log(error);
             
