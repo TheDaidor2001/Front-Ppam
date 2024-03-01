@@ -1,11 +1,9 @@
-import { Congregacion, type Voluntario } from "@/interfaces/voluntario.interface"
-import { useVoluntariosStore } from "@/stores/Voluntarios"
-import { reactive, ref } from "vue"
+
+import { reactive, } from "vue"
 
 
 export const useVoluntarios = () => {
 
-    const {createVoluntario} = useVoluntariosStore()
 
     const voluntario = reactive({
         nombre: '',
